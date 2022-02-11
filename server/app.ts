@@ -13,7 +13,7 @@ app.get("/api/hello", (req, res) => {
 
 // All other unmatched requests will return the React app
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
 });
 
 export default app;
