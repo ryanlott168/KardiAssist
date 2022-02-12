@@ -1,6 +1,7 @@
 import { Routes, Route} from "react-router-dom";
 import Homepage from './components/Homepage';
-import About from './components/About';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import './styles/App.css';
 
 export default function App() {
@@ -8,7 +9,8 @@ export default function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="about" element={<About />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
       </Routes>
     </div>
   );
