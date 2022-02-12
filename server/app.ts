@@ -5,7 +5,8 @@ const app = express();
 
 app.use(express.json());
 // Serve the React static files after build
-app.use(express.static("../client/build"));
+// app.use(express.static("../client/build"));
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.get("/api/hello", (req, res) => {
   res.send({ message: "Hello" });
