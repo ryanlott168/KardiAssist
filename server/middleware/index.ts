@@ -1,7 +1,5 @@
-import authJwt from './authJwt';
-import verifySignUp from './verifySignUp';
+import authMiddleware from './authMiddleware';
 
 export default {
-  authJwt,
-  verifySignUp
+  authMiddleware
 };

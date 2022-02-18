@@ -1,17 +1,12 @@
 import mongoose from 'mongoose';
 
-const User = mongoose.model(
-  "User",
+const User = mongoose.model("User",
   new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
-    roles: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Role"
-      }
-    ]
+    googleid: String,
+    firstName: String,
+    lastName: String,
+    hashedPass: String,
+    email: String
   })
 );
 

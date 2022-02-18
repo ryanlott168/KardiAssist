@@ -1,20 +1,36 @@
-import express from "express";
-import path from "path";
+import 'dotenv/config'
+import express from 'express';
+import session from 'express-session';
+import cors from 'cors';
+import path from 'path';
+import auth from './config/auth';
+import routes from './routes';
+import mw from './middleware';
+import passport from 'passport';
+import './controllers/signin';
 
 const app = express();
+const  { isLoggedIn } = mw.authMiddleware;
 
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
+
+app.use(session({ secret: auth.SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.json());
-// Serve the React static files after build
-// app.use(express.static("../client/build"));
-app.use(express.static(path.resolve(__dirname, "../client/build")));
 
-app.get("/api/hello", (req, res) => {
-  res.send({ message: "Hello" });
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+app.use('/auth', routes.authRoutes);
+
+app.get('/', (req, res) => {
+  
+  res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
 });
 
-// All other unmatched requests will return the React app
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+app.get('/protected', isLoggedIn, (req, res) => {
+  res.send(req.user);
 });
+
 
 export default app;
