@@ -1,19 +1,15 @@
-import { Routes, Route} from "react-router-dom";
-import Homepage from './components/Homepage';
-import Header from "./components/Header";
-import Login from './components/Login';
-import './styles/App.scss';
+import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProvider } from "./useAuth";
+import InnerApp from "./components/InnerApp";
 
 
 export default function App() {
 
   return (
-    <div className="App">
-      <Header/>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="login" element={<Login />} />
-      </Routes>
-    </div>
+    <Router>
+      <AuthProvider>
+        <InnerApp />
+      </AuthProvider>
+    </Router>
   );
 }
