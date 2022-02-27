@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import useAuth from '../useAuth';
+import FollowUpTaskList from './followUp/TaskList';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
