@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import '../styles/Homepage.scss';
-import useAuth from '../useAuth';
+import useAuth from '../../useAuth';
 
-export default function Homepage() {
+export default function NotAuthorized() {
   const { user } = useAuth();
 
   return (
       <>
         <main>
-          <h2>Welcome to the homepage!</h2>
+          <h2>401: Access Denied</h2>
+          <p>You are not authorized to view this page.</p>
           <div className='btnContainer'>
             {!user ? 
             <Link to='/login'>
