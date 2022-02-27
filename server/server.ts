@@ -13,7 +13,6 @@ db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`
     process.exit();
 });
 
-
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 });

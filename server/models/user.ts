@@ -6,7 +6,11 @@ const User = mongoose.model("User",
     firstName: String,
     lastName: String,
     password: String,
-    email: String
+    email: String,
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
   })
 );
 

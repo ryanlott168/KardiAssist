@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import useAuth from "../useAuth";
+import { Link } from 'react-router-dom';
+import useAuth from '../useAuth';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -11,8 +11,8 @@ export default function Dashboard() {
           <p>You can do this, I believe in you.</p>
         </main>
         <nav>
-          <Link to="/">Home</Link>
-          <button type="button" onClick={logout}>Logout</button>
+          <Link to='/'>Home</Link>
+          <button type='button' onClick={logout}>Logout</button>
         </nav>
       </>
   );

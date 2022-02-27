@@ -8,16 +8,14 @@ import auth from './config/auth';
 import apiRoutes from './api';
 import mw from './middleware';
 import passport from 'passport';
-import initializePassport from './controllers/passport'
+import initializePassport from './controllers/passport';
 dotenv.config()
+
+const app = express();
+// app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
 initializePassport(passport);
 
-const app = express();
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
-
-
-const  { isLoggedIn } = mw.authMiddleware;
 app.use(flash());
 app.use(session({
   secret: process.env.SECRET,
@@ -30,10 +28,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
-
-app.use('/api', apiRoutes);
-
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+app.use('/api', apiRoutes); 
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));

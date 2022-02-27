@@ -2,25 +2,23 @@ import passportLocal from 'passport-local';
 import passportGoogle from 'passport-google-oauth2';
 import bcrypt from 'bcryptjs';
 import auth from '../config/auth';
-import db from'../models';
-import { stringify } from 'querystring';
-const User = db.user;
+import { getUser } from './users';
 const LocalStrategy = passportLocal.Strategy;
 const GoogleStrategy = passportGoogle.Strategy;
 
 
 function initialize (passport) {
     const authenticateUserLocal = async (email: string, password: string , done) => {
-        console.log(arguments);
-        const user = await User.findOne({ email });
-        console.log(user)
+
+        const user = await getUser(email);
+
         if(user === null) {
             return done(null, false, { message: 'No user with that email' });
         }
 
         try {
-            // if (await bcrypt.compare(password, user.password)) {
-            if (password === user.password) {
+            if (await bcrypt.compare(password, user.password)) {
+            // if (password === user.password) {
                 return done(null, user);
             } else {
                 return done(null, false, { message: 'Password incorrect' });

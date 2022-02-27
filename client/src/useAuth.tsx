@@ -1,11 +1,11 @@
-import React, {
+import {
 createContext,
 ReactNode,
 useContext,
 useEffect,
 useMemo,
 useState,
-} from "react";
+} from 'react';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as sessionsApi from './helper/api/sessions';
@@ -17,7 +17,7 @@ interface AuthContextType {
     loading: boolean;
     error?: any;
     login: (email: string, password: string) => void;
-    signUp: (email: string, name: string, password: string) => void;
+    addUser: (firstName: string, lastName: string, email: string, password: string, isAdmin: boolean) => void;
     logout: () => void;
 }
 
@@ -73,16 +73,15 @@ export function AuthProvider({ children }: { children: ReactNode; }): JSX.Elemen
         .finally(() => setLoading(false));
     }
 
-    // Sends sign up details to the server. On success we just apply
-    // the created user to the state.
-    function signUp(email: string, name: string, password: string) {
+    // Sends new user details to the server. 
+    function addUser(firstName: string, lastName: string, email: string, password: string, isAdmin: boolean) {
         setLoading(true);
 
-        usersApi.signUp({ email, name, password })
-        .then((user) => {
-            setUser(user);
-            navigate('/');
-        })
+        usersApi.addUser({ firstName, lastName, email, password, isAdmin })
+        // .then((user) => {
+        //     setUser(user);
+        //     navigate('/');
+        // })
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
     }
@@ -108,7 +107,7 @@ export function AuthProvider({ children }: { children: ReactNode; }): JSX.Elemen
         loading,
         error,
         login,
-        signUp,
+        addUser,
         logout,
         }),
         [user, loading, error]
