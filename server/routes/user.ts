@@ -1,4 +1,5 @@
 import express from 'express';
+import { parseUserData } from '../middleware/user';
 import { createUser } from '../controllers/users';
 import { isLoggedIn, isAdmin } from '../middleware/authMiddleware';
 
@@ -13,21 +14,16 @@ interface ReturnUserInfo {
 const router = express.Router();
 
 
-router.get('/', isLoggedIn, (req, res) => {
-    if(!req.user) {
-        res.sendStatus(401);
-    } else {
+router.get('/', isLoggedIn, parseUserData, (req, res) => {
+    // const userInfo: ReturnUserInfo = {
+    //     firstName: req.user['firstName'],
+    //     lastName: req.user['lastName'],
+    //     email: req.user['email']
+    // }
 
-        const userInfo: ReturnUserInfo = {
-            firstName: req.user['firstName'],
-            lastName: req.user['lastName'],
-            email: req.user['email']
-        }
+    // if(req.user['isAdmin']) userInfo.isAdmin = true;
 
-        if(req.user['isAdmin']) userInfo.isAdmin = true;
-
-        res.status(200).send(userInfo);
-    }
+    res.status(200).send(req.user);
 });
 
 router.post('/', isAdmin, async (req, res) => {
