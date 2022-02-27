@@ -8,7 +8,6 @@ interface CreateUserInfo {
     email: string;
     password: string;
     admin?: boolean;
-    googleid?: string,
 }
 
 // Retrieve User
