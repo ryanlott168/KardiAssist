@@ -2,11 +2,22 @@ import mongoose from 'mongoose';
 
 const User = mongoose.model("User",
   new mongoose.Schema({
-    googleid: String,
-    firstName: String,
-    lastName: String,
-    password: String,
-    email: String,
+    firstName: {
+      type: String,
+      required: true
+    },
+    lastName: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
     isAdmin: {
       type: Boolean,
       default: false
