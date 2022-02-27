@@ -15,14 +15,6 @@ const router = express.Router();
 
 
 router.get('/', isLoggedIn, parseUserData, (req, res) => {
-    // const userInfo: ReturnUserInfo = {
-    //     firstName: req.user['firstName'],
-    //     lastName: req.user['lastName'],
-    //     email: req.user['email']
-    // }
-
-    // if(req.user['isAdmin']) userInfo.isAdmin = true;
-
     res.status(200).send(req.user);
 });
 
