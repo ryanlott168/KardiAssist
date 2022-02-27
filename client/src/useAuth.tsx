@@ -74,15 +74,14 @@ export function AuthProvider({ children }: { children: ReactNode; }): JSX.Elemen
     }
 
     // Sends new user details to the server. 
-    function addUser(firstName: string, lastName: string, email: string, password: string, isAdmin: boolean) {
+    async function addUser(firstName: string, lastName: string, email: string, password: string, isAdmin: boolean) {
         setLoading(true);
 
-        usersApi.addUser({ firstName, lastName, email, password, isAdmin })
-        // .then((user) => {
-        //     setUser(user);
-        //     navigate('/');
-        // })
-        .catch((error) => setError(error))
+        return await usersApi.addUser({ firstName, lastName, email, password, isAdmin })
+        .catch((error) => {
+            setError(error);
+            return error;
+        })
         .finally(() => setLoading(false));
     }
 

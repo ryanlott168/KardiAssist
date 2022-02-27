@@ -2,17 +2,13 @@ import dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
 import flash from 'express-flash';
-import cors from 'cors';
 import path from 'path';
-import auth from './config/auth';
 import apiRoutes from './api';
-import mw from './middleware';
 import passport from 'passport';
 import initializePassport from './controllers/passport';
 dotenv.config()
 
 const app = express();
-// app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
 initializePassport(passport);
 
@@ -22,7 +18,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: { 
-    maxAge: 900000 }
+    maxAge: 900000 
+  }
 }));
 
 app.use(passport.initialize());

@@ -7,13 +7,9 @@ export default function Dashboard() {
   return (
       <>
         <main>
-          <h2>Welcome to the Dashboard, {user!.email}!</h2>
+          <h2>Welcome to the Dashboard, {user!.firstName}!</h2>
           <p>You can do this, I believe in you.</p>
         </main>
-        <nav>
-          <Link to='/'>Home</Link>
-          <button type='button' onClick={logout}>Logout</button>
-        </nav>
       </>
   );
 }
