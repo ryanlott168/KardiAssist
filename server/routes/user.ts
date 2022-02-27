@@ -1,5 +1,6 @@
 import express from 'express';
-import { createUser } from '../controllers/users'
+import { createUser } from '../controllers/users';
+import { isLoggedIn, isAdmin } from '../middleware/authMiddleware';
 
 
 interface ReturnUserInfo {
@@ -12,7 +13,7 @@ interface ReturnUserInfo {
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
+router.get('/', isLoggedIn, (req, res) => {
     if(!req.user) {
         res.sendStatus(401);
     } else {
@@ -29,20 +30,16 @@ router.get('/', (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    if(!req.user || !req.user['isAdmin']) {
-        res.sendStatus(401);
-    } else {
-        // Create user
-        const userInfo = req.body.user;
-        try {
-            await createUser(userInfo);
-        } catch (err) {
-            res.sendStatus(409);
-        }
-
-        res.sendStatus(200);
+router.post('/', isAdmin, async (req, res) => {
+    // Create user
+    const userInfo = req.body.user;
+    try {
+        await createUser(userInfo);
+    } catch (err) {
+        res.sendStatus(409);
     }
+
+    res.sendStatus(200);
 });
 
 export default router;
