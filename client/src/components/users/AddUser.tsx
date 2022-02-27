@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import useAuth from '../../useAuth';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
 
 interface AddUserInputs {
   firstName: string;
@@ -13,19 +14,31 @@ interface AddUserInputs {
 };
 
 export default function AddUser() {
-  const { register, handleSubmit, reset } = useForm<AddUserInputs>();
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const defaultFormValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    isAdmin: false
+  }
+
+  const { register, handleSubmit, reset } = useForm<AddUserInputs>({ defaultValues: defaultFormValues});
   const { addUser, loading, error } = useAuth();
 
   const onSubmit: SubmitHandler<AddUserInputs> = async (data) => {
     const { firstName, lastName, email, password, isAdmin } = data;
     addUser(firstName, lastName, email, password, isAdmin);
-    reset(data);
+    setFormSubmitted(true);
+    reset(defaultFormValues)
   };
 
   return (
     <>
       <main>
-        <h2>Add New User</h2>
+        <h1>Add New User</h1>
+        {!formSubmitted ? 
         <Form onSubmit={ handleSubmit(onSubmit) } >
           <Form.Group className='mb-3'>
             <Form.Label>First Name</Form.Label>
@@ -56,7 +69,17 @@ export default function AddUser() {
           <Button disabled={loading} variant='primary' type='submit'>
             Submit
           </Button>
-        </Form>
+        </Form> :
+        <div>
+          <h2>New user created!</h2>
+          <div className='btnContainer'>
+              <Button variant='primary' onClick={() => { setFormSubmitted(false) }}>Create another user</Button>
+            <Link to='/dashboard'>
+              <Button variant='primary'>Return to Dashboard</Button>
+            </Link>
+          </div>
+        </div>
+        }
 
       </main>
     </>
