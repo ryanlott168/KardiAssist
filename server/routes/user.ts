@@ -1,7 +1,8 @@
 import express from 'express';
+import { isLoggedIn, isAdmin } from '../middleware/authMiddleware';
 import { parseUserData } from '../middleware/user';
 import { createUser } from '../controllers/users';
-import { isLoggedIn, isAdmin } from '../middleware/authMiddleware';
+
 
 
 interface ReturnUserInfo {
