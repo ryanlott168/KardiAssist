@@ -16,12 +16,14 @@ const User = mongoose.model("User",
     },
     email: {
       type: String,
+      unique: true,
       required: true
     },
     isAdmin: {
       type: Boolean,
       default: false
-    }
+    },
+    followUpTasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'FollowUpTask' }]
   })
 );
 
