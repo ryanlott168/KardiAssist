@@ -5,13 +5,14 @@ import flash from 'express-flash';
 import path from 'path';
 import apiRoutes from './api';
 import passport from 'passport';
+import cors from 'cors';
 import initializePassport from './controllers/passport';
 dotenv.config()
 
 const app = express();
 
 initializePassport(passport);
-
+app.use(cors())
 app.use(flash());
 app.use(session({
   secret: process.env.SECRET,
