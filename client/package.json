@@ -23,6 +23,7 @@
     "redaxios": "^0.4.1",
     "sass": "^1.49.7",
     "typescript": "^4.5.5",
+    "use-async-effect": "^2.2.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
