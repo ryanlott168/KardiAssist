@@ -6,7 +6,7 @@ const FollowUpTask = db.followUpTask;
 
 // Retrieve all tasks
 export async function getFollowUpTasks (userId: string):  Promise<FollowUpTask[]> {
-    return await FollowUpTask.find({ createdBy: userId });
+    return await FollowUpTask.find({ createdBy: userId }, { _id: 0, __v: 0, createdBy: 0 });
 }
 
 // Create new task

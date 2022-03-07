@@ -1,15 +1,15 @@
-import { useState } from "react";
-import useAuth from "../../useAuth";
+import Task from './Task';
+import { FollowUpTask } from '../../interfaces/task'
 
-export default function TaskList() {
-    const { user } = useAuth();
-    const [tasks, setTasks] = useState([]);
+interface Props {
+    tasks: FollowUpTask[];
+}
 
-    
-  
+export default function TaskList({ tasks }: Props) {
     return (
         <div id='followUpTaskList'>
             <h1>TASKS</h1>
+            {tasks.map(task => <Task task={ task } />)}
         </div>
     );
-  }
+}

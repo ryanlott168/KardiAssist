@@ -2,16 +2,20 @@ import mongoose from 'mongoose';
 
 const FollowUpTask = mongoose.model("FollowUpTask",
   new mongoose.Schema({
-    firstName: {
+    study: {
       type: String,
       required: true
     },
-    lastName: {
+    name: {
       type: String,
       required: true
     },
     DOB: {
       type: Date,
+      required: true
+    },
+    windowName: {
+      type: String,
       required: true
     },
     windowOpenDate: {
