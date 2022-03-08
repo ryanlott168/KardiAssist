@@ -1,25 +1,29 @@
 import db from'../models';
-import FollowUpTask from '../interfaces/FollowUpTask';
+import { FollowUpTask, FollowUpTaskUpdate } from '../interfaces/FollowUpTask';
 const FollowUpTask = db.followUpTask;
 
 
 
-// Retrieve all tasks
+// Retrieve all follow-up tasks associated w/ current user
 export async function getFollowUpTasks (userId: string):  Promise<FollowUpTask[]> {
-    return await FollowUpTask.find({ createdBy: userId }, { _id: 0, __v: 0, createdBy: 0 });
+    return await FollowUpTask.find({ createdBy: userId }, { __v: 0, createdBy: 0 });
 }
 
-// Create new task
+// Create new follow-up task 
 export async function createFollowUpTask (newTaskData: FollowUpTask) {
     const task = new FollowUpTask(newTaskData);
     return await task.save();
 }
 
-// Update task
-export async function updateFollowUpTask (taskID) {
+// Update follow-up task
+// Task must be associated with current user
+export async function updateFollowUpTask (taskID: string, userId: string, update: FollowUpTaskUpdate) {
+    return FollowUpTask.findOneAndUpdate({ _id: taskID, createdBy: userId }, update);
 }
 
 
-// Delete task
-export async function deleteFollowUpTask (taskID) {
+// Delete follow-up task
+// Task must be associated with current user
+export async function deleteFollowUpTask (taskID: string, userId: string) {
+    return FollowUpTask.deleteOne({ _id: taskID, createdBy: userId });
 }
