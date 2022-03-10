@@ -24,14 +24,9 @@ export default function Task({ task, handleTaskDelete, handleTaskUpdate }: Props
             notes: task.notes
         }
     });
-    const getDirtyFields = () => {
-        return dirtyFields;
-    }
     
     const onSubmit = async (data: any) => {
         // Prevents update call if no fields changed
-        let change = getDirtyFields();
-        console.log(change)
         if(Object.keys(dirtyFields).length > 0) {
             const update: { [key: string]: string } = {};
             for(const key in dirtyFields) {
