@@ -8,7 +8,7 @@ import useAuth from '../useAuth';
 export default function Header() {
 
     const { user, logout } = useAuth();
-    console.log(user);
+    
     return (
         <>
             <header>
