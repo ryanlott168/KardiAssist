@@ -32,6 +32,8 @@ export default function TaskList({ tasks, updateFollowUpTaskList, newTaskVisible
         }
     }
 
+    
+
     return (
         <div id='followUpTaskList'>
             <h1>TASKS</h1>

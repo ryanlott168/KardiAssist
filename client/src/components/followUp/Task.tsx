@@ -25,15 +25,13 @@ export default function Task({ task, handleTaskDelete, handleTaskUpdate }: Props
         }
     });
     
-    const onSubmit = async (data: any) => {
+    const onUpdateSubmit = async (data: any) => {
         // Prevents update call if no fields changed
         if(Object.keys(dirtyFields).length > 0) {
             const update: { [key: string]: string } = {};
             for(const key in dirtyFields) {
-                
                 update[key] = data[key];
             }
-            console.log(update);
             await handleTaskUpdate(task._id!, update);
         }
 
@@ -60,7 +58,6 @@ export default function Task({ task, handleTaskDelete, handleTaskUpdate }: Props
                 <td><button onClick={() => handleTaskDelete(task._id!)}>Delete</button></td>
             </tr> :
             <>
-                <form onSubmit={handleSubmit(onSubmit)} id='updateTaskForm'></form>
                 <tr>
                     <td></td>
                     <td><input type="text" placeholder="study" {...register("study", {required: true})} /></td>
@@ -70,7 +67,7 @@ export default function Task({ task, handleTaskDelete, handleTaskUpdate }: Props
                     <td><input type="date" placeholder="windowOpenDate" {...register("windowOpenDate", {required: true})} /></td>
                     <td><input type="date" placeholder="windowCloseDate" {...register("windowCloseDate", {required: true})} /></td>
                     <td><textarea {...register("notes", {})} /></td>
-                    <td><input type="submit" form='updateTaskForm'/></td>
+                    <td><input type="submit" onClick={handleSubmit(onUpdateSubmit)} /></td>
                 </tr>
             </>}
         </>

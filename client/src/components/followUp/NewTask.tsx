@@ -32,7 +32,6 @@ export default function NewTask({ updateFollowUpTaskList }: Props) {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} id="NewTaskForm"></form>
             <tr>
                     <td></td>
                     <td><input type="text" placeholder="study" {...register("study", {required: true})} /></td>
@@ -42,7 +41,7 @@ export default function NewTask({ updateFollowUpTaskList }: Props) {
                     <td><input type="date" placeholder="windowOpenDate" {...register("windowOpenDate", {required: true})} /></td>
                     <td><input type="date" placeholder="windowCloseDate" {...register("windowCloseDate", {required: true})} /></td>
                     <td><textarea {...register("notes", {})} /></td>
-                    <td><input type="submit" form='NewTaskForm'/></td>
+                    <td><input type="submit" onClick={handleSubmit(onSubmit)} /></td>
             </tr>
         </>
     );
