@@ -2,7 +2,7 @@ import app from './app';
 import db from './models';
 import dbConfig from './config/db';
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 // Connect to DB
 db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`).then(() => {
