@@ -1,9 +1,13 @@
+import { useEffect, useState } from 'react';
+import useAsyncEffect from 'use-async-effect';
 import Task from './Task';
 import { FollowUpTask, FollowUpTaskUpdate } from '../../interfaces/task';
 import { deleteTask, updateTask } from '../../helper/api/followUpTasks';
+import { fetchStudyNames, addStudy } from '../../helper/api/studies';
 import Table from 'react-bootstrap/Table';
 import NewTask from './NewTask';
 import '../../styles/FollowUpTaskList.scss'
+
 
 interface Props {
     tasks: FollowUpTask[];
@@ -12,6 +16,12 @@ interface Props {
 }
 
 export default function TaskList({ tasks, updateFollowUpTaskList, newTaskVisible }: Props) {
+    const [studyNames, setStudyNames] = useState<string[]>([]);
+    // Setting up study creation infrustructure
+    useAsyncEffect(async () => {
+        const studies = await fetchStudyNames();
+        setStudyNames(studies);
+    }, []);
 
     const handleTaskDelete = async (taskId: string) => {
         try {
@@ -32,15 +42,15 @@ export default function TaskList({ tasks, updateFollowUpTaskList, newTaskVisible
         }
     }
 
-    
-
     return (
         <div id='followUpTaskList'>
-            <h1>TASKS</h1>
+            <div id="followUpTaskListHeader">
+                <h1>TASKS</h1>
+                <p>Phone: (512) 961-8516</p>
+            </div>
             <Table striped bordered hover size='sm' width={'100%'}>
                 <thead>
                     <tr>
-                        <th>Priority #</th>
                         <th>Study Name</th>
                         <th>Name</th>
                         <th>DOB</th>
@@ -55,10 +65,11 @@ export default function TaskList({ tasks, updateFollowUpTaskList, newTaskVisible
                         <Task 
                         task={ task } 
                         handleTaskDelete={ handleTaskDelete } 
-                        handleTaskUpdate={ handleTaskUpdate } 
+                        handleTaskUpdate={ handleTaskUpdate }
+                        studyNames={ studyNames }
                         key={task._id} 
                         />))}
-                        { newTaskVisible ? <NewTask updateFollowUpTaskList={ updateFollowUpTaskList } /> : null }
+                        { newTaskVisible ? <NewTask studyNames={ studyNames }updateFollowUpTaskList={ updateFollowUpTaskList } /> : null }
                 </tbody>
             </Table>
         </div>
