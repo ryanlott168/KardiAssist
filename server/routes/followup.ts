@@ -30,7 +30,7 @@ router.post('/task', isLoggedIn, async (req, res) => {
 });
 
 // Route to update an existing follow-up task in the database
-router.post('/task/:id', isLoggedIn, async (req, res) => {
+router.put('/task/:id', isLoggedIn, async (req, res) => {
     const taskId = path.basename(req.url);
     try {
         await updateFollowUpTask(taskId, req.user['_id'], req.body);

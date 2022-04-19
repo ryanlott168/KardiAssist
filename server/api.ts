@@ -6,6 +6,7 @@ const router = express.Router();
 router.use('/auth', routes.authRoutes);
 router.use('/user', routes.userRoutes);
 router.use('/follow_up', routes.followUpRoutes);
+router.use('/studies', routes.studyRoutes);
 
 router.delete('/session', (req, res) => {
     req.logout();
