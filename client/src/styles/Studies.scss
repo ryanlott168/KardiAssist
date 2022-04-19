@@ -1,0 +1,33 @@
+#studyMain {
+    display: grid;
+    grid: 100% 
+    / 40% 60%;
+}
+
+#studyPanel {
+    height: 5em;
+    padding: 0 2rem;
+    border: 1px solid black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.studyPanelName {
+    width: 40%;
+}
+
+.studyPanelBtns {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.studyPanelBtns button {
+    margin-left: 1rem;
+}
+
+#currentStudiesHeader {
+    display: flex;
+    justify-content: space-around;
+}

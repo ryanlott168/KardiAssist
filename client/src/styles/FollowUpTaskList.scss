@@ -4,3 +4,15 @@ input {
 tr:nth-child(even) {
     background-color:rgb(125, 197, 156);
 }
+
+#followUpTaskListHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 55%;
+    margin-left: auto;
+}
+#followUpTaskListHeader p {
+    margin: 0 1rem;
+    justify-self: flex-end;
+}
