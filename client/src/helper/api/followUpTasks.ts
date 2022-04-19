@@ -21,7 +21,7 @@ export async function addTask (newTask: FollowUpTask) {
 
 export async function updateTask (taskId: string, update: FollowUpTaskUpdate) {
     try {
-        return axios.post(`/api/follow_up/task/${taskId}`, update);
+        return axios.put(`/api/follow_up/task/${taskId}`, update);
     } catch (err) {
         return err;
     }
