@@ -3,8 +3,6 @@ import { isLoggedIn, isAdmin } from '../middleware/authMiddleware';
 import { parseUserData } from '../middleware/user';
 import { createUser } from '../controllers/users';
 
-
-
 interface ReturnUserInfo {
     firstName: string;
     lastName: string;
@@ -13,7 +11,6 @@ interface ReturnUserInfo {
 }
 
 const router = express.Router();
-
 
 router.get('/', isLoggedIn, parseUserData, (req, res) => {
     res.status(200).send(req.user);

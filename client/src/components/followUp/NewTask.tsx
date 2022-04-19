@@ -3,10 +3,11 @@ import { addTask } from '../../helper/api/followUpTasks';
 import { FollowUpTask } from '../../interfaces/task';
 
 interface Props {
+    studyNames: string[];
     updateFollowUpTaskList: () => void;
 }
 
-export default function NewTask({ updateFollowUpTaskList }: Props) {
+export default function NewTask({ studyNames, updateFollowUpTaskList }: Props) {
     const { register, handleSubmit, reset } = useForm({
         defaultValues: {
             study: '',
@@ -32,17 +33,19 @@ export default function NewTask({ updateFollowUpTaskList }: Props) {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} id="NewTaskForm"></form>
             <tr>
-                    <td></td>
-                    <td><input type="text" placeholder="study" {...register("study", {required: true})} /></td>
+                    <td>
+                        <select  {...register("study", {required: true})} >
+                            {studyNames.map(studyName => <option value={studyName}>{studyName}</option>)}
+                        </select>
+                    </td>
                     <td><input type="text" placeholder="name" {...register("name", {required: true})} /></td>
                     <td><input type="date" placeholder="DOB" {...register("DOB", {required: true})} /></td>
                     <td><input type="text" placeholder="windowName" {...register("windowName", {required: true})} /></td>
                     <td><input type="date" placeholder="windowOpenDate" {...register("windowOpenDate", {required: true})} /></td>
                     <td><input type="date" placeholder="windowCloseDate" {...register("windowCloseDate", {required: true})} /></td>
                     <td><textarea {...register("notes", {})} /></td>
-                    <td><input type="submit" form='NewTaskForm'/></td>
+                    <td><input type="submit" onClick={handleSubmit(onSubmit)} /></td>
             </tr>
         </>
     );

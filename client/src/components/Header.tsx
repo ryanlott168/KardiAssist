@@ -14,11 +14,12 @@ export default function Header() {
             <header>
                 <Navbar bg='light' expand='lg'>
                 <Container>
-                    <Navbar.Brand href='/'>Follow-up Assist</Navbar.Brand>
+                    <Navbar.Brand href='/dashboard'>Follow-up Assist</Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav className='me-auto'>
                         <Nav.Link href='/'>Home</Nav.Link>
+                        <Nav.Link href='/studies'>Studies</Nav.Link>
                         { user && user.isAdmin ? <Nav.Link href='user/addUser'>Add User</Nav.Link> : null }
                         { !user ? <Nav.Link href='/login'>Log in</Nav.Link> : <Nav.Link href='/' onClick={() => { logout(); }}>Log out</Nav.Link> }
                     </Nav>
