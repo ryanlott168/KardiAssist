@@ -3,6 +3,7 @@ import Homepage from './Homepage';
 import Header from './Header';
 import Login from './auth/Login';
 import Dashboard from './Dashboard';
+import Studies from './studies';
 import AddUser from './users/AddUser';
 import AuthenticatedRoute from './auth/AuthenticatedRoute';
 import NotAuthorized from './err/NotAuthorized';
@@ -23,6 +24,12 @@ export default function InnerApp() {
               <Route path='/dashboard' element={
                 <AuthenticatedRoute security={'user'}>
                   <Dashboard />
+                </AuthenticatedRoute>
+                }
+              />
+              <Route path='/studies' element={
+                <AuthenticatedRoute security={'user'}>
+                  <Studies />
                 </AuthenticatedRoute>
                 }
               />
