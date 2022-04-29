@@ -10,10 +10,6 @@ import NotAuthorized from './err/NotAuthorized';
 import '../styles/App.scss';
 import NotFound from './err/NotFound';
 
-
-
-
-
 export default function InnerApp() {
 
     return (

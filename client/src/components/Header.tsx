@@ -1,6 +1,7 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import '../styles/Homepage.scss';
 import useAuth from '../useAuth';
 
 
@@ -19,7 +20,7 @@ export default function Header() {
                     <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav className='me-auto'>
                         <Nav.Link href='/'>Home</Nav.Link>
-                        <Nav.Link href='/studies'>Studies</Nav.Link>
+                        { user ? <Nav.Link href='/studies'>Studies</Nav.Link> : null}
                         { user && user.isAdmin ? <Nav.Link href='user/addUser'>Add User</Nav.Link> : null }
                         { !user ? <Nav.Link href='/login'>Log in</Nav.Link> : <Nav.Link href='/' onClick={() => { logout(); }}>Log out</Nav.Link> }
                     </Nav>
